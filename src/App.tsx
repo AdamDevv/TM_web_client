@@ -6,23 +6,27 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TranslatorsManagement from './pages/translators/TranslatorsManagement';
 import ContractsManagement from './pages/contracts/ContractsManagement';
 import Index from './pages/Index';
+import CustomersEditor from './pages/customers/CustomersEditor';
 
 class App extends Component {
-render() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Index />} />
-          <Route path="translators" element={<TranslatorsManagement />} />
-          <Route path="customers" element={<CustomersManagement />} />
-          <Route path="contracts" element={<ContractsManagement />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
-}
+  render() {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Index />} />
+            <Route path="translators" element={<TranslatorsManagement />} />
+            
+            <Route path="customers" element={<CustomersManagement />} />
+            <Route path='customers/new' element={<CustomersEditor />}/>
+            <Route path='customers/:uid' element={<CustomersEditor />}/>
 
+            <Route path="contracts" element={<ContractsManagement />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
