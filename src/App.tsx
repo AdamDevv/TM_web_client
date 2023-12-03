@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Component } from 'react';
 import './App.css';
+import Layout from './components/Layout';
+import CustomersManagement from './pages/customers/CustomersManagement';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import TranslatorsManagement from './pages/translators/TranslatorsManagement';
+import ContractsManagement from './pages/contracts/ContractsManagement';
+import Index from './pages/Index';
 
-function App() {
+class App extends Component {
+render() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Index />} />
+          <Route path="translators" element={<TranslatorsManagement />} />
+          <Route path="customers" element={<CustomersManagement />} />
+          <Route path="contracts" element={<ContractsManagement />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
+}
+
 }
 
 export default App;
