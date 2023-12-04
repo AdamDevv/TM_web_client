@@ -7,6 +7,7 @@ import TranslatorsManagement from './pages/translators/TranslatorsManagement';
 import ContractsManagement from './pages/contracts/ContractsManagement';
 import Index from './pages/Index';
 import CustomersEditor from './pages/customers/CustomersEditor';
+import TranslatorsEditor from './pages/translators/TranslatorsEditor';
 
 class App extends Component {
   render() {
@@ -16,7 +17,9 @@ class App extends Component {
           <Route path="/" element={<Layout />}>
             <Route index element={<Index />} />
             <Route path="translators" element={<TranslatorsManagement />} />
-            
+            <Route path='translators/new' element={<TranslatorsEditor />}/>
+            <Route path='translators/:uid' element={<TranslatorsEditor />}/>
+
             <Route path="customers" element={<CustomersManagement />} />
             <Route path='customers/new' element={<CustomersEditor />}/>
             <Route path='customers/:uid' element={<CustomersEditor />}/>

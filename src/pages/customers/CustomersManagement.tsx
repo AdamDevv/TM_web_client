@@ -48,12 +48,12 @@ export default function CustomersManagement() {
 
       <hr />
 
-      <Link to="/customers/new" className="d-flex justify-content-end text-decoration-none">
-        <Button className="mb-2 ps-2 d-inline-flex align-items-center" variant="outline-success">
+      <div className="d-flex justify-content-end">
+        <Link to="/customers/new" className="mb-2 ps-2 d-inline-flex btn btn-outline-success align-items-center text-decoration-none">
           <Icon iconName="Plus" size={30}/>
           Create new
-        </Button>
-      </Link>
+        </Link>
+      </div>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -70,7 +70,6 @@ export default function CustomersManagement() {
                 <td>{c.name}</td>
                 <td>
                   <div className="d-flex justify-content-end align-items-center gap-2">
-                    {/* <Icon onClick={test} cursor="pointer" iconName="List" color="gray" size={22}/> */}
                     <Link to={`${c.uid}`}><Icon cursor="pointer" iconName="PencilFill" color="royalBlue" size={22}/></Link>
                     <Icon onClick={() => deleteDialog(c)} cursor="pointer" iconName="TrashFill" color="red" size={22}/>
                   </div>

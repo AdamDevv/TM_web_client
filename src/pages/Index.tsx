@@ -1,4 +1,5 @@
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function Index() {
   return (
@@ -8,9 +9,9 @@ export default function Index() {
       </div>
 
       <div className="d-flex gap-3 justify-content-center">
-        <Button as="a" href="translators" variant="primary" size="lg">Translators</Button>
-        <Button as="a" href="customers" variant="success" size="lg">Customers</Button>
-        <Button as="a" href="contracts" variant="danger" size="lg">Contracts</Button>
+        <Link to="translators"><Button href="translators" variant="primary" size="lg">Translators</Button></Link>
+        <Link to="customers"><Button variant="success" size="lg">Customers</Button></Link>
+        <Link to="contracts"><Button variant="danger" size="lg">Contracts</Button></Link>
       </div>
     </div>
   )

@@ -5,7 +5,7 @@ import { Icon } from "../../components/Icon";
 import Modal from 'react-bootstrap/Modal';
 import { Link } from "react-router-dom";
 import { Translator, TranslatorStatus } from "../../model/translators/Translator";
-import { deleteTranslator, getAllTranslators } from "../../services/TranslatorsService";
+import { deleteTranslator, getAllTranslators, updateTranslatorStatus } from "../../services/TranslatorsService";
 
 export default function TranslatorsManagement() {
   const [translators, setTranslators] = useState<Translator[]>([]);
@@ -40,6 +40,17 @@ export default function TranslatorsManagement() {
     });
   }
 
+  function updateStatus(value: Translator) {
+    updateTranslatorStatus(value.uid, TranslatorStatus.Certified);
+    
+    var a = [...translators];
+    a.find(t => t.uid === value.uid)!.status = TranslatorStatus.Certified;
+    
+    console.log(a);
+
+    setTranslators(a);
+  }
+
   return (
     <div>
       <Breadcrumb className="ps-3 pt-3">
@@ -48,12 +59,12 @@ export default function TranslatorsManagement() {
 
       <hr />
 
-      <Link to="/translators/new" className="d-flex justify-content-end text-decoration-none">
-        <Button className="mb-2 ps-2 d-inline-flex align-items-center" variant="outline-success">
+      <div className="d-flex justify-content-end">
+        <Link to="/translators/new" className="mb-2 ps-2 d-inline-flex btn btn-outline-success align-items-center text-decoration-none">
           <Icon iconName="Plus" size={30}/>
           Create new
-        </Button>
-      </Link>
+        </Link>
+      </div>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -76,7 +87,14 @@ export default function TranslatorsManagement() {
                 <td>{t.creditCardNumber}</td>
                 <td>
                   <div className="d-flex justify-content-end align-items-center gap-2">
-                    {/* <Icon onClick={test} cursor="pointer" iconName="List" color="gray" size={22}/> */}
+                    <Icon 
+                      onClick={t.status === TranslatorStatus.Certified ? undefined : () => updateStatus(t)} 
+                      cursor="pointer" 
+                      iconName="ArrowUpSquare" 
+                      color="green" 
+                      style={(t.status === TranslatorStatus.Certified ? ({opacity:0.5, cursor:"not-allowed"}) : undefined)} 
+                      size={22}/
+                    >
                     <Link to={`${t.uid}`}><Icon cursor="pointer" iconName="PencilFill" color="royalBlue" size={22}/></Link>
                     <Icon onClick={() => deleteDialog(t)} cursor="pointer" iconName="TrashFill" color="red" size={22}/>
                   </div>
