@@ -10,5 +10,5 @@ export interface TranslationContract {
   status: TranslationContractStatus;
   price: number;
   customerUid: string;
-  translatorUid: string;
+  translatorUid?: string;
 }

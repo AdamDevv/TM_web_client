@@ -43,12 +43,10 @@ export default function TranslatorsManagement() {
   function updateStatus(value: Translator) {
     updateTranslatorStatus(value.uid, TranslatorStatus.Certified);
     
-    var a = [...translators];
-    a.find(t => t.uid === value.uid)!.status = TranslatorStatus.Certified;
-    
-    console.log(a);
+    var newTranslators = [...translators];
+    newTranslators.find(t => t.uid === value.uid)!.status = TranslatorStatus.Certified;
 
-    setTranslators(a);
+    setTranslators(newTranslators);
   }
 
   return (

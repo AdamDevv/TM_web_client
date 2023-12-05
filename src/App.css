@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.dropdown .dropdown-hide-arrow::after {
+  display: none;
+}

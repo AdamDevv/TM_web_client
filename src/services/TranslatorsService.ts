@@ -1,9 +1,9 @@
 import { CommonApiResultCode } from "../model/resultCodes/CommonApiResultCode";
-import { Translator } from "../model/translators/Translator";
+import { Translator, TranslatorStatus } from "../model/translators/Translator";
 import { fetchApiResult, fetchApiResultValue } from "../utils/apiUtils";
 
-export const getAllTranslators = () => {
-  return fetchApiResultValue<CommonApiResultCode, Translator[]>("translators", 'GET')
+export const getAllTranslators = (onlyCertified: boolean = false) => {
+  return fetchApiResultValue<CommonApiResultCode, Translator[]>(`translators?${new URLSearchParams({ "onlyCertified": String(onlyCertified) })}`, 'GET')
 };
 
 export const getTranslator = (uid: string) => {
@@ -29,4 +29,8 @@ export const updateTranslator = (uid: string, name: string, hourlyRate: number, 
 
 export const deleteTranslator = (uid: string) => {
   return fetchApiResult<CommonApiResultCode>(`translators/${uid}`, 'DELETE');
+}
+
+export const updateTranslatorStatus = (uid: string, status: TranslatorStatus) => {
+  return fetchApiResult<CommonApiResultCode>(`translators/${uid}/status?${new URLSearchParams({ "status": String(status) })}`, 'PUT');
 }
